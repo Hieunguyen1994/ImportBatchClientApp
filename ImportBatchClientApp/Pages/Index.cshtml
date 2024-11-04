@@ -1,0 +1,53 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center mt-3">
+    <h2>Please enter the XML content, filename, external reference, and file format below:</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label style="float: left; font-weight: bold" for="XmlInput">XML Input</label>
+            <textarea id="XmlInput" name="XmlInput" class="form-control" rows="4" placeholder="Enter XML content here">@Model.XmlInput</textarea>
+        </div>
+        <br />
+        <div class="form-group">
+            <label style="float: left; font-weight: bold" for="Filename">Filename</label>
+            <input type="text" id="Filename" name="Filename" class="form-control" placeholder="Enter Filename (e.g., sample.xml)" value="@Model.Filename" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label style="float: left; font-weight: bold" for="ExternalReference">External Reference</label>
+            <input type="text" id="ExternalReference" name="ExternalReference" class="form-control" placeholder="Enter External Reference (e.g., reference123)" value="@Model.ExternalReference" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label style="float: left; font-weight: bold" for="Format">Format</label>
+            <input type="text" id="Format" name="Format" class="form-control" placeholder="Enter Format File (e.g, Gfxml, Baxter, Vespoke)" value="@Model.Format" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.TokenResponse))
+    {
+        <div class="alert alert-info mt-3">
+            <strong>Token Response:</strong>
+            <p style="overflow-wrap: break-word;">
+                @Model.TokenResponse
+            </p>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.ApiResponse))
+    {
+        <div class="alert alert-info mt-3">
+            <strong>API Response:</strong>
+            <p style="overflow-wrap: break-word;">
+                @Model.ApiResponse
+            </p>
+        </div>
+    }
+</div>
