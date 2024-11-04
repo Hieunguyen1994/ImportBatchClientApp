@@ -60,7 +60,7 @@ namespace ImportBatchClientApp.Pages
             var url = "http://HIEUNGUYEN/identity/connect/token";
             var requestData = new Dictionary<string, string>
         {
-            { "client_id", "gf.his.integration1" },
+            { "client_id", "gf.his.integration" },
             { "client_secret", "default@123" },
             { "grant_type", "client_credentials" },
             { "Scopes", "openid profile offline_access email roles bridge.api.integration" }

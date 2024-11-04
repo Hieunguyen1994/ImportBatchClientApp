@@ -3,3 +3,5 @@
 ################################################################################
 
 /ImportBatchClientApp/obj
+/.vs/ImportBatchClientApp
+/ImportBatchClientApp/bin/Debug/net6.0
