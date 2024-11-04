@@ -32,6 +32,9 @@ namespace ImportBatchClientApp.Pages
         public string ApiResponse { get; set; }
         public string TokenResponse { get; set; }
 
+        /// <summary>
+        /// Handles the POST request to the page.
+        /// </summary>
         public async Task OnPostAsync()
         {
             // Step 1: Retrieve the token
@@ -55,16 +58,20 @@ namespace ImportBatchClientApp.Pages
             ApiResponse = await CallImportBatchInformationApiAsync(requestData);
         }
 
+        /// <summary>
+        /// Retrieves an API token from the authentication server.
+        /// </summary>
+        /// <returns>The API token as a string, or null if the request fails.</returns>
         private async Task<string> GetApiTokenAsync()
         {
             var url = "http://HIEUNGUYEN/identity/connect/token";
             var requestData = new Dictionary<string, string>
-        {
-            { "client_id", "gf.his.integration" },
-            { "client_secret", "default@123" },
-            { "grant_type", "client_credentials" },
-            { "Scopes", "openid profile offline_access email roles bridge.api.integration" }
-        };
+            {
+                { "client_id", "gf.his.integration" },
+                { "client_secret", "default@123" },
+                { "grant_type", "client_credentials" },
+                { "Scopes", "openid profile offline_access email roles bridge.api.integration" }
+            };
 
             var requestContent = new FormUrlEncodedContent(requestData);
 
@@ -99,6 +106,11 @@ namespace ImportBatchClientApp.Pages
             }
         }
 
+        /// <summary>
+        /// Calls the ImportBatchInformation API with the provided request data.
+        /// </summary>
+        /// <param name="requestData">The data to be sent to the API.</param>
+        /// <returns>The API response as a string, or an error message if the request fails.</returns>
         private async Task<string> CallImportBatchInformationApiAsync(RequestData<string> requestData)
         {
             var url = "http://localhost:58312/bridge-api/api/batch";
