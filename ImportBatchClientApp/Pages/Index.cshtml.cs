@@ -113,7 +113,7 @@ namespace ImportBatchClientApp.Pages
         /// <returns>The API response as a string, or an error message if the request fails.</returns>
         private async Task<string> CallImportBatchInformationApiAsync(RequestData<string> requestData)
         {
-            var url = "http://localhost:58312/bridge-api/api/batch";
+            var url = "http://localhost/bridge-api/api/batch";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
 
             var jsonContent = JsonConvert.SerializeObject(requestData);
