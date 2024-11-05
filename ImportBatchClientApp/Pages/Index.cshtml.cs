@@ -64,7 +64,7 @@ namespace ImportBatchClientApp.Pages
         /// <returns>The API token as a string, or null if the request fails.</returns>
         private async Task<string> GetApiTokenAsync()
         {
-            var url = "http://HIEUNGUYEN/identity/connect/token";
+            var url = "http://localhost/identity/connect/token";
             var requestData = new Dictionary<string, string>
             {
                 { "client_id", "gf.his.integration" },
