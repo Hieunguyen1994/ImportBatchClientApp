@@ -1,6 +1,7 @@
 ﻿using ImportBatchClientApp.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
@@ -11,10 +12,12 @@ namespace ImportBatchClientApp.Pages
     public class IndexModel : PageModel
     {
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-        public IndexModel(HttpClient httpClient)
+        public IndexModel(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
+            _configuration = configuration;
         }
 
         [BindProperty]
@@ -64,13 +67,13 @@ namespace ImportBatchClientApp.Pages
         /// <returns>The API token as a string, or null if the request fails.</returns>
         private async Task<string> GetApiTokenAsync()
         {
-            var url = "http://localhost/identity/connect/token";
+            var url = _configuration["ApiSettings:TokenUrl"];
             var requestData = new Dictionary<string, string>
             {
-                { "client_id", "gf.his.integration" },
-                { "client_secret", "default@123" },
-                { "grant_type", "client_credentials" },
-                { "Scopes", "openid profile offline_access email roles bridge.api.integration" }
+                { "client_id", _configuration["ApiSettings:ClientId"] },
+                { "client_secret", _configuration["ApiSettings:ClientSecret"] },
+                { "grant_type", _configuration["ApiSettings:GrantType"] },
+                { "Scopes", _configuration["ApiSettings:Scopes"] }
             };
 
             var requestContent = new FormUrlEncodedContent(requestData);
@@ -113,7 +116,7 @@ namespace ImportBatchClientApp.Pages
         /// <returns>The API response as a string, or an error message if the request fails.</returns>
         private async Task<string> CallImportBatchInformationApiAsync(RequestData<string> requestData)
         {
-            var url = "http://localhost/bridge-api/api/batch";
+            var url = _configuration["ApiSettings:BatchApiUrl"];
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
 
             var jsonContent = JsonConvert.SerializeObject(requestData);
