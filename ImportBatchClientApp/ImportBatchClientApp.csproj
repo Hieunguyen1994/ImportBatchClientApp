@@ -10,4 +10,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="GF.Bridge.DataService.Contracts">
+      <HintPath>GF.Bridge.DataService.Contracts.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+	
 </Project>

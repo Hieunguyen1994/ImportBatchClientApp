@@ -1,7 +1,6 @@
-﻿using ImportBatchClientApp.DTO;
+﻿using GF.Bridge.DataService.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
@@ -54,7 +53,7 @@ namespace ImportBatchClientApp.Pages
                 Data = base64Data,
                 Filename = Filename,
                 ExternalReference = ExternalReference,
-                Format = Format
+                Format = string.IsNullOrEmpty(Format) ? null : (HostMessageFormat)Enum.Parse(typeof(HostMessageFormat), Format)
             };
 
             // Step 3: Call the ImportBatchInformation API
